@@ -18,18 +18,21 @@ y = breastData.target
 #Split The data into training and testing arrays
 x_train, x_test, y_train, y_test = train_test_split(x, y, train_size=.75, random_state=20)
 
-#
-neighbors = np.arange(1,425)
+#Set np arrays for training, testing, and neighbors
+neighbors = np.arange(1,50)
 train_acc = np.empty(len(neighbors))
 test_acc = np.empty(len(neighbors))
 
+#run through testing for each k number of neighbors
 for i,k in enumerate(neighbors):
+    #training
     knn = KNeighborsClassifier(n_neighbors=k)
     knn.fit(x_train, y_train)
-
+    #Save accuracy for both training and testing
     train_acc[i] = knn.score(x_train, y_train)
     test_acc[i] = knn.score(x_test, y_test)
-    
+
+#Show Relevant plots based on requirements
 plt.plot(neighbors,test_acc,label="Testing Dataset Accuracy")
 plt.legend()
 plt.xlabel("n_neighbors")
@@ -38,7 +41,7 @@ plt.show()
 
 
 
-
+#Show Relavent data based on requirements
 unique, counts = np.unique(breastData.target,return_counts=True)
 classification = dict(zip(breastData.target_names, counts))
 print(f'Features and Attributes (Total): {len(breastData.feature_names)}')
