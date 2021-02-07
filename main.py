@@ -1,15 +1,15 @@
 from pandas.plotting import scatter_matrix
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.model_selection import train_test_split
-from sklearn.datasets import load_breast_cancer,load_digits
-from matplotlib import cm
+from sklearn.datasets import load_breast_cancer
 import pandas as pd
 import matplotlib.pyplot as plt 
 import numpy as np
 from scipy import stats
+from matplotlib import cm
 
 #Load the data into an object
-breastData = load_breast_cancer()
+breastData = load_breast_cancer(as_frame=True)
 
 #Split up the data
 x = breastData.data
@@ -26,21 +26,37 @@ test_acc = np.empty(len(neighbors))
 #run through testing for each k number of neighbors
 for i,k in enumerate(neighbors):
     #training
-    knn = KNeighborsClassifier(n_neighbors=k)
+    knn = KNeighborsClassifier(n_neighbors=k,metric='minkowski',p=1, weights='distance')
     knn.fit(x_train, y_train)
     #Save accuracy for both training and testing
     train_acc[i] = knn.score(x_train, y_train)
     test_acc[i] = knn.score(x_test, y_test)
 
 #Show Relevant plots based on requirements
+plt.figure()
 plt.plot(neighbors,test_acc,label="Testing Dataset Accuracy")
 plt.legend()
 plt.xlabel("n_neighbors")
 plt.ylabel("Accuracy")
+
+
+xlab = 'mean radius'
+ylab = 'mean concavity'
+zlab = 'mean symmetry'
+pt2= plt.figure()
+ax = pt2.add_subplot(111, projection='3d')
+ax.scatter(x_train[xlab], x_train[ylab], x_train[zlab], c=y_train, marker='o', s=100)
+ax.set_xlabel(xlab)
+ax.set_ylabel(ylab)
+ax.set_zlabel(zlab)
+plt.legend()
+
+cmap = cm.get_cmap('gnuplot')
+scatter = scatter_matrix(x_train[breastData.feature_names[:5]], c=y_train, marker='o', s=20, hist_kwds={'bins': 15}, figsize=(9, 9), cmap=cmap)
+cmap2 = cm.get_cmap('gnuplot')
+scatter2 = scatter_matrix(x_train[breastData.feature_names[6:10]], c=y_train,
+                         marker='o', s=20, hist_kwds={'bins': 15}, figsize=(9, 9), cmap=cmap2)
 plt.show()
-
-
-
 #Show Relavent data based on requirements
 unique, counts = np.unique(breastData.target,return_counts=True)
 classification = dict(zip(breastData.target_names, counts))
