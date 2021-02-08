@@ -90,7 +90,6 @@ Some things we can extrapolate from this data is the following:
 * In a test of 425 nearest neighbors, it showed that as the k number increased past 50, the accuracy took steep losses up to the point where at 300 nearest neighbors, the accuracy was 86.7% which is still high but not as accurate as the 93-94% with lower numbers
 
 ---
-sav
 
 # Summary of Classification Results
 
