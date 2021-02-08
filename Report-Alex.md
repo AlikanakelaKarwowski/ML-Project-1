@@ -46,33 +46,31 @@ The results below come directly from our testing of the k nearest neighbors algo
 
 
 ```python
-Features & Attributes (Total): 30
-Features & Attributes (Type): [
-    'mean radius' 'mean texture' 'mean perimeter' 'mean area'
-    'mean smoothness' 'mean compactness' 'mean concavity'
-    'mean concave points' 'mean symmetry' 'mean fractal dimension'
-    'radius error' 'texture error' 'perimeter error' 'area error'
-    'smoothness error' 'compactness error' 'concavity error'
-    'concave points error' 'symmetry error' 'fractal dimension error'
-    'worst radius' 'worst texture' 'worst perimeter' 'worst area'
-    'worst smoothness' 'worst compactness' 'worst concavity'
-    'worst concave points' 'worst symmetry' 'worst fractal dimension'
-]
+Features and Attributes (Total): 30
+Features and Attributes (Type): ['mean radius' 'mean texture' 'mean perimeter' 'mean area'
+ 'mean smoothness' 'mean compactness' 'mean concavity'
+ 'mean concave points' 'mean symmetry' 'mean fractal dimension'
+ 'radius error' 'texture error' 'perimeter error' 'area error'
+ 'smoothness error' 'compactness error' 'concavity error'
+ 'concave points error' 'symmetry error' 'fractal dimension error'
+ 'worst radius' 'worst texture' 'worst perimeter' 'worst area'
+ 'worst smoothness' 'worst compactness' 'worst concavity'
+ 'worst concave points' 'worst symmetry' 'worst fractal dimension']
 Number of Classes: ['malignant' 'benign']
 Distribution of Classes: {'malignant': 212, 'benign': 357}
 Dataset Partition (Training): 75.5%
 Dataset Partition (Testing): 24.5%
-Distance Metric: euclidean
-Estimate Accuracy at 5 Nearest Neighbors: 0.923
-Estimate Accuracy at 15 Nearest Neighbors: 0.93
+Distance Metric: manhattan
+Estimate Accuracy at 5 Nearest Neighbors: 0.944
+Estimate Accuracy at 15 Nearest Neighbors: 0.937
 Estimate Accuracy at 30 Nearest Neighbors: 0.93
-Estimate Accuracy at 50 Nearest Neighbors: 0.916
-Min: 0.881
-Max: 0.937
-Mean: 0.929
-Median: 0.93
-Mode: 0.93
-STD: 0.009
+Estimate Accuracy at 50 Nearest Neighbors: 0.937
+Min: 0.909
+Max: 0.944
+Mean: 0.933
+Median: 0.937
+Mode: 0.937
+STD: 0.006
 ```
 <center>
 
