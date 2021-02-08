@@ -2,12 +2,12 @@ from pandas.plotting import scatter_matrix
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn.model_selection import train_test_split
 from sklearn.datasets import load_breast_cancer
+from sklearn.metrics import plot_confusion_matrix
+from scipy import stats
+from matplotlib import cm
 import pandas as pd
 import matplotlib.pyplot as plt 
 import numpy as np
-from scipy import stats
-from matplotlib import cm
-
 #Load the data into an object
 breastData = load_breast_cancer(as_frame=True)
 
@@ -26,12 +26,16 @@ test_acc = np.empty(len(neighbors))
 #run through testing for each k number of neighbors
 for i,k in enumerate(neighbors):
     #training
+    #setting the metric to minkowski and p = 1 set the algorithm used to manhattan
     knn = KNeighborsClassifier(n_neighbors=k,metric='minkowski',p=1, weights='distance')
     knn.fit(x_train, y_train)
     #Save accuracy for both training and testing
     train_acc[i] = knn.score(x_train, y_train)
     test_acc[i] = knn.score(x_test, y_test)
+knn = KNeighborsClassifier(n_neighbors=15, metric='minkowski', p=1, weights='distance')
+knn.fit(x_train, y_train)
 
+plot_confusion_matrix(knn, x_test, y_test)
 #Show Relevant plots based on requirements
 plt.figure()
 plt.plot(neighbors,test_acc,label="Testing Dataset Accuracy")
@@ -49,7 +53,6 @@ ax.scatter(x_train[xlab], x_train[ylab], x_train[zlab], c=y_train, marker='o', s
 ax.set_xlabel(xlab)
 ax.set_ylabel(ylab)
 ax.set_zlabel(zlab)
-plt.legend()
 
 cmap = cm.get_cmap('gnuplot')
 scatter = scatter_matrix(x_train[breastData.feature_names[:5]], c=y_train, marker='o', s=20, hist_kwds={'bins': 15}, figsize=(9, 9), cmap=cmap)
